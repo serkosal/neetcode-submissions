@@ -1,0 +1,21 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        if (!l1 && !l2) return nullptr;
+
+        ListNode* res = new ListNode, *cur = res;
+        while (l1 || l2) {
+            const int 
+                sum = cur->val + (l1 ? l1->val : 0) + (l2 ? l2->val : 0), 
+                remainder = sum / 10;
+            cur->val = sum % 10;
+            
+            if (l1) l1 = l1->next;
+            if (l2) l2 = l2->next;
+            
+            if ((!l1 && !l2) && !remainder) break;
+            cur = cur->next = new ListNode(remainder);
+        }
+        return res;
+    }
+};
